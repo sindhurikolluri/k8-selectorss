@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: affinity
+  name: anti-affinity
   labels:
-    purpose: "affinity-demo"
+    purpose: "anti-affinity"
 spec:
   affinity:
     nodeAffinity:
@@ -11,7 +11,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: hardware
-            operator: In
+            operator: NotIn #anti-affinity
             values:
             - gpu
   containers:
@@ -21,4 +21,4 @@ spec:
   - key: "hardware"
     operator: "Equal"
     value: "gpu"
-    effect: "NoExecute" 
+    effect: "NoExecute"
